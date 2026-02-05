@@ -15,8 +15,6 @@
                 <param name="min">-0.85</param>
                 <param name="max">0.85</param>
             </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
             <state_interface name="position">
                 <param name="initial_value">0</param>
             </state_interface>
@@ -27,91 +25,77 @@
                 <param name="min">-0.85</param>
                 <param name="max">0.85</param>
             </command_interface>
-            <command_interface name="velocity"/>
-            <command_interface name="acceleration"/> 
-            <state_interface name="position">
-                <param name="initial_value">0</param>
-            </state_interface>
-        </joint>
-
-        <!-- Joint 2 -->
-        <joint name="right_joint1">
-            <command_interface name="position">
-                <param name="min">-0.05</param>
-                <param name="max">0.85</param>
-            </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
             <state_interface name="position">
                 <param name="initial_value">0</param>
             </state_interface>
         </joint>
 
         <!-- Joint 3 -->
-        <joint name="right_joint2">
+        <joint name="left_joint_x">
             <command_interface name="position">
                 <param name="min">-0.05</param>
                 <param name="max">0.45</param>
             </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
-            <state_interface name="position">
-                <param name="initial_value">0</param>
-            </state_interface>
-        </joint>
-
-        <!-- Joint 4 -->
-        <joint name="right_joint3">
-            <command_interface name="position">
-                <param name="min">-0.05</param>
-                <param name="max">0.25</param>
-            </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
             <state_interface name="position">
                 <param name="initial_value">0</param>
             </state_interface>
         </joint>
 
         <!-- Joint 5 -->
-        <joint name="left_joint1">
+        <joint name="left_joint_y">
             <command_interface name="position">
                 <param name="min">-0.05</param>
                 <param name="max">0.85</param>
             </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
             <state_interface name="position">
                 <param name="initial_value">0</param>
             </state_interface>
         </joint>
 
         <!-- Joint 3 -->
-        <joint name="left_joint2">
+        <joint name="right_joint_x">
             <command_interface name="position">
                 <param name="min">-0.05</param>
                 <param name="max">0.45</param>
             </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
             <state_interface name="position">
                 <param name="initial_value">0</param>
             </state_interface>
         </joint>
 
-        <!-- Joint 4 -->
-        <joint name="left_joint3">
+        <!-- Joint 2 -->
+        <joint name="right_joint_y">
             <command_interface name="position">
                 <param name="min">-0.05</param>
-                <param name="max">0.25</param>
+                <param name="max">0.85</param>
             </command_interface>
-            <command_interface name="velocity"/> 
-            <command_interface name="acceleration"/>
             <state_interface name="position">
                 <param name="initial_value">0</param>
             </state_interface>
         </joint>
 
     </ros2_control>
+
+    <!-- <transmission name="body_joint_trans">
+            <plugin>transmission_interface/SimpleTransmission</plugin>
+            <joint name="body_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="body_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="face_joint_x_trans">
+            <plugin>transmission_interface/SimpleTransmission</plugin>
+            <joint name="face_joint_x">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="face_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission> -->
 
 </robot>

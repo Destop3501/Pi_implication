@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <link name="right_arm1">
+    <link name="right_arm">
         <visual>
-            <origin xyz="0.0 0.0 -0.075" rpy="0.0 0.0 0.0"/>
+            <origin xyz="-0.12 -0.02 -0.35" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.050 0.050 0.150"/>
+                <mesh filename="package://nema_description/3D/Mesh/RightArm.dae" scale="0.002 0.002 0.002"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 -0.075" rpy="0.0 0.0 0.0"/>
+            <origin xyz="-0.12 -0.02 -0.35" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.050 0.050 0.150"/>
+                <mesh filename="package://nema_description/3D/Collition/RightArm.stl" scale="0.002 0.002 0.002"/>
             </geometry>
         </collision>
         <inertial>
@@ -21,17 +21,32 @@
         </inertial>
     </link>
 
-    <link name="right_arm2">
+    <link name="right_arm_intermediate_link">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 3.14"/>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+        </inertial>
+    </link>
+    <link name="left_arm_intermediate_link">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 3.14"/>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+        </inertial>
+    </link>
+
+    <link name="left_arm">
         <visual>
-            <origin xyz="0.0 0.0 -0.0375" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.24 0 -0.38" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.050 0.050 0.075"/>
+                <mesh filename="package://nema_description/3D/Mesh/LeftArm.dae" scale="0.002 0.002 0.002"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 -0.0375" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.24 0 -0.38" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.050 0.050 0.075"/>
+                <mesh filename="package://nema_description/3D/Collition/LeftArm.stl" scale="0.002 0.002 0.002"/>
             </geometry>
         </collision>
         <inertial>
@@ -40,83 +55,20 @@
             <inertia ixx="0.03" ixy="0.0" ixz="0.0" iyy="0.03" iyz="0.0" izz="0.03"/>
         </inertial>
     </link>
-    <link name="right_arm3">
-        <visual>
-            <origin xyz="0.0 0.00 -0.03" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.060"/>
-            </geometry>
-        </visual>    
-        <collision>
-            <origin xyz="0.0 0.0 -0.03" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.060"/>
-            </geometry>
-        </collision>  
-        <inertial>
-            <origin xyz="0.0 0.0 -0.030" rpy="0.0 0.0 0.0"/>
-            <mass value="0.01"/>
-            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-        </inertial>  
-    </link>
+    <xacro:macro name="material_visual" params="ref_link">
+        <gazebo reference="${ref_link}">
+            <visual>
+                <material>
+                    <ambient>0.3 0.3 0.3 1.0</ambient>
+                    <diffuse>0.7 0.7 0.7 1.0</diffuse>
+                    <specular>0.01 0.01 0.01 1.0</specular>
+                    <emissive>0.0 0.0 0.0 1.0</emissive>
+                </material>
+            </visual>
+        </gazebo>
+    </xacro:macro>
 
-    <link name="left_arm1">
-        <visual>
-            <origin xyz="0.0 0.0 -0.075" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.150"/>
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0.0 0.0 -0.075" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.150"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <origin xyz="0.0 0.0 -0.075" rpy="0.0 0.0 0.0"/>
-            <mass value="0.06"/>
-            <inertia ixx="0.06" ixy="0.0" ixz="0.0" iyy="0.06" iyz="0.0" izz="0.06"/>
-        </inertial>
-    </link>
-
-    <link name="left_arm2">
-        <visual>
-            <origin xyz="0.0 0.0 -0.0375" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.075"/>
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0.0 0.0 -0.0375" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.075"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <origin xyz="0.0 0.0 -0.0375" rpy="0.0 0.0 0.0"/>
-            <mass value="0.03"/>
-            <inertia ixx="0.03" ixy="0.0" ixz="0.0" iyy="0.03" iyz="0.0" izz="0.03"/>
-        </inertial>
-    </link>
-    <link name="left_arm3">
-        <visual>
-            <origin xyz="0.0 0.00 -0.03" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.060"/>
-            </geometry>
-        </visual>    
-        <collision>
-            <origin xyz="0.0 0.0 -0.03" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.050 0.050 0.060"/>
-            </geometry>
-        </collision>  
-        <inertial>
-            <origin xyz="0.0 0.0 -0.030" rpy="0.0 0.0 0.0"/>
-            <mass value="0.01"/>
-            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-        </inertial>  
-    </link>
+    <xacro:material_visual ref_link="right_arm"/>
+    <xacro:material_visual ref_link="left_arm"/>
 </robot>
     

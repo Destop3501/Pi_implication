@@ -32,6 +32,7 @@ def generate_launch_description():
         ]),
         value_type=str
     )
+    print(robot_description)
 
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
@@ -61,5 +62,5 @@ def generate_launch_description():
         declare_use_sim_time_cmd,
         robot_state_publisher_node,
         joint_state_publisher_gui_node,
-        # rviz_node
+        rviz_node
     ])
