@@ -9,6 +9,9 @@
             <geometry>
                 <cylinder radius="0.200" length="0.1"/>
             </geometry>
+	    <material name="red">
+       		<color rgba="1 0 0 1"/>
+    	    </material>
         </visual>
         <collision>
             <origin xyz="0.0 0.0 0.050" rpy="0.0 0.0 0.0"/>

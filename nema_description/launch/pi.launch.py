@@ -37,7 +37,7 @@ def generate_launch_description():
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        output='screen',
+        output='both',
         parameters=[{
             "robot_description": robot_description,
             "use_sim_time": use_sim_time,
@@ -47,11 +47,18 @@ def generate_launch_description():
     joint_state_publisher_node = Node(
         package="joint_state_publisher",
         executable="joint_state_publisher",
+	parameters=[{'use_sim_time': True}]
     )
 
     foxglove_node = Node(
         package='foxglove_bridge',
-        executable='foxglove_bridge'
+        executable='foxglove_bridge',
+	parameters=[{
+        	'use_sim_time': True,
+        	'send_service_discovery': False, # Stop the background "parameter" scanning
+        	'capabilities': ['parameters', 'services', 'connectionGraph'], # Limit what it tries to do
+    		'ignore_unresponsive_param_nodes': True,
+	}]
     )
 
     return LaunchDescription([

@@ -14,16 +14,15 @@ from launch.actions import TimerAction
 
 def generate_launch_description():
     Nema_Description_pkg = get_package_share_directory("nema_description")
-    rviz_launch_file = os.path.join(Nema_Description_pkg,'launch','rviz.launch.py')
+    rviz_launch_file = os.path.join(Nema_Description_pkg,'launch','pi.launch.py')
     urdffile = os.path.join(Nema_Description_pkg,'urdf', 'model.urdf.xacro')
 
     Nema_gazebo_pkg = get_package_share_directory("nema_gazebo")
     yamlfile = os.path.join(Nema_gazebo_pkg,'config','ros2_controllers.yaml')
     worldgazebo = os.path.join(Nema_gazebo_pkg,'gazebo_world','empty.world')
-    optimized_world_path = os.path.join(Nema_gazebo_pkg, 'gazebo_world', 'optimized.sdf')
 
-    camara_pkg = get_package_share_directory("camera_streamer")
-    camara_launch_file = os.path.join(camara_pkg,"launch","camara.launch.py")
+    # camara_pkg = get_package_share_directory("camera_streamer")
+    # camara_launch_file = os.path.join(camara_pkg,"launch","camara.launch.py")
 
     pkg_ros_gz_sim = launch_ros.substitutions.FindPackageShare('ros_gz_sim').find('ros_gz_sim')
     gz_sim_luanch = os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
@@ -50,7 +49,7 @@ def generate_launch_description():
     declared_arguments = [
         DeclareLaunchArgument(
             name='headless',
-            default_value='false',
+            default_value='true',
             description='Set to "true" to run Gazebo headlessly.'
         ),
         DeclareLaunchArgument(
@@ -79,8 +78,8 @@ def generate_launch_description():
         ]),
         launch_arguments={"gz_args": IfElseSubstitution(
             headless,
-            if_value=[-s -r -v 4 empty.sdf],
-            else_value=[ -r -v 4 empty.sdf]
+            if_value='-s -r -v 4 empty.sdf',
+            else_value='-r -v 4 empty.sdf'
             )
         }.items(), 
     )
@@ -91,7 +90,8 @@ def generate_launch_description():
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
         ],
-        output='screen'
+        output='screen',
+	parameters=[{"use_sim_time":True}]
     )
 
     start_gazebo_ros_spawner_cmd = Node(
@@ -125,9 +125,9 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
             "--controller-manager-timeout",
-            "60",
+            "300",
             "--switch-timeout",
-            "60",
+            "300",
         ],
         parameters=[{"use_sim_time": True}],
     )
@@ -140,9 +140,9 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
             "--controller-manager-timeout",
-            "60",
+            "300",
             "--switch-timeout",
-            "60",
+            "300",
         ],
         parameters=[{"use_sim_time": True}],
     )
@@ -155,9 +155,9 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
             "--controller-manager-timeout",
-            "60",
+            "300",
             "--switch-timeout",
-            "60",
+            "300",
         ],
         parameters=[{"use_sim_time": True}],
     )
@@ -170,11 +170,16 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
             "--controller-manager-timeout",
-            "60",
+            "300",
             "--switch-timeout",
-            "60",
+            "300",
         ],
         parameters=[{"use_sim_time": True}],
+    )
+	
+    delayed_joint_broadcaster = TimerAction(
+    	period=10.0,
+    	actions=[joint_state_broadcaster_spawner]
     )
 
     spawners_chain_1 = launch.actions.RegisterEventHandler(
@@ -211,9 +216,9 @@ def generate_launch_description():
         gazebo_ros_bridge,
         start_gazebo_ros_spawner_cmd,
         # controller_manager,
-        joint_state_broadcaster_spawner,
+        # joint_state_broadcaster_spawner,
         # load_camara_launch_py,
-        
+        delayed_joint_broadcaster,
         spawners_chain_1,
         spawners_chain_2,
         spawners_chain_3,
