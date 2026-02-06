@@ -1,0 +1,66 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+    use_sim_time: true
+    switch_controller_timeout: 100.0
+    switch_timeout: 100.0
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    body_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    leftarm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    rightarm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+body_controller:
+  ros__parameters:
+    joints:
+      - body_joint
+      - face_joint_x
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    # allow_nonzero_velocity_at_trajectory_end: true
+    # allow_partial_joints_goal: false
+    # open_loop_control: true
+
+    # gains:
+    #   body_joint:
+    #     p: 25.0
+    #     i: 0.0
+    #     d: 3.0
+    #   face_joint_x:
+    #     p: 20.0
+    #     i: 0.0
+    #     d: 2.5
+
+
+leftarm_controller:
+  ros__parameters:
+    joints:
+      - left_joint_x
+      - left_joint_y
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    # allow_nonzero_velocity_at_trajectory_end: true
+rightarm_controller:
+  ros__parameters:
+    joints:
+      - right_joint_x
+      - right_joint_y
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    # allow_nonzero_velocity_at_trajectory_end: true

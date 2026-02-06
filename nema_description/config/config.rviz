@@ -112,7 +112,7 @@ Visualization Manager:
         Mass: false
       Name: RobotModel
       TF Prefix: ""
-      Update Interval: 0
+      Update Interval: 0.1
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
@@ -165,13 +165,13 @@ Visualization Manager:
               right_arm_intermediate_link:
                 right_arm:
                   {}
-      Update Interval: 0
+      Update Interval: 0.1
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Fixed Frame: world
-    Frame Rate: 30
+    Frame Rate: 10
   Name: root
   Tools:
     - Class: rviz_default_plugins/Interact

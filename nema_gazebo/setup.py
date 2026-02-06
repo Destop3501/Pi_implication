@@ -2,7 +2,8 @@ from setuptools import find_packages, setup
 import os
 from glob import glob
 
-package_name = 'nema_description'
+
+package_name = 'nema_gazebo'
 
 setup(
     name=package_name,
@@ -14,9 +15,6 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share',package_name,'launch'),glob(os.path.join('launch','*launch.py'))),
         (os.path.join('share',package_name,'config'),glob(os.path.join('config','**','*.*'),recursive=True)),
-        (os.path.join('share',package_name,'3D/Mesh'),glob(os.path.join('3D/Mesh','**','*.*'),recursive=True)),
-        (os.path.join('share',package_name,'3D/Collition'),glob(os.path.join('3D/Collition','**','*.*'),recursive=True)),
-        (os.path.join('share',package_name,'urdf'),glob(os.path.join('urdf','**','*.*'),recursive=True))
     ],
     install_requires=['setuptools'],
     zip_safe=True,

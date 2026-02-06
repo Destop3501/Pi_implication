@@ -44,10 +44,10 @@ def generate_launch_description():
         }]
     )
 
-    joint_state_publisher_gui_node = Node(
-        package="joint_state_publisher_gui",
-        executable="joint_state_publisher_gui",
-    )
+    # joint_state_publisher_gui_node = Node(
+    #     package="joint_state_publisher_gui",
+    #     executable="joint_state_publisher_gui",
+    # )
 
     rviz_node = Node(
         package="rviz2",
@@ -61,6 +61,6 @@ def generate_launch_description():
         model,
         declare_use_sim_time_cmd,
         robot_state_publisher_node,
-        joint_state_publisher_gui_node,
+        # joint_state_publisher_gui_node,
         rviz_node
     ])
